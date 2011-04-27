@@ -1,3 +1,35 @@
+//
+// main.c - Hacklab.to RGB Blinkie
+//
+//  Copyright 2011 Stefan Arentz <stefan@arentz.ca>
+//
+//  Permission to use, copy, modify, distribute, and sell this
+//  software and its documentation for any purpose is hereby granted
+//  without fee, provided that the above copyright notice appear in
+//  all copies and that both that the copyright notice and this
+//  permission notice and warranty disclaimer appear in supporting
+//  documentation, and that the name of the author not be used in
+//  advertising or publicity pertaining to distribution of the
+//  software without specific, written prior permission.
+//
+//  The author disclaim all warranties with regard to this
+//  software, including all implied warranties of merchantability
+//  and fitness.  In no event shall the author be liable for any
+//  special, indirect or consequential damages or any damages
+//  whatsoever resulting from loss of use, data or profits, whether
+//  in an action of contract, negligence or other tortious action,
+//  arising out of or in connection with the use or performance of
+//  this software.
+//
+// This is the source code for the RGB Blinkie soldering kit that was
+// made specifically for the Toronto Hacklab.
+//
+// The full project, including schematics, can be found at
+//
+//  http://github.com/hacklabto/hacklab-rgbblinkie
+//
+// Build instructions are on the wiki part of the Github project.
+//
 
 #include <avr/interrupt.h>
 #include <avr/io.h>
@@ -6,7 +38,7 @@
 #include <avr/sleep.h>
 #include <util/delay.h>
 
-// The current values of the RGB LED is stored in three separate
+// The current values of the LEDs are stored in three separate
 // variables. These represent the amount of time that the color
 // is 'on'.
 
@@ -28,7 +60,7 @@ uint8_t ee_program __attribute__((section(".eeprom"))) = 0;
 EMPTY_INTERRUPT(PCINT0_vect);
 
 // The pulse() functions takes care of two things. If checks for button
-// presses and it 'pulses' the LED.
+// presses and it 'pulses' the LED for one duty cycle.
 
 void pulse()
 {
